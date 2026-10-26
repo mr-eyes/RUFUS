@@ -10,7 +10,7 @@ message("TEST: ENV{CPLUS_INCLUDE_PATH}")
 
 ExternalProject_Add(${SAMBLASTER_PROJECT}
 	GIT_REPOSITORY https://github.com/GregoryFaust/samblaster.git 
-	GIT_TAG master
+	GIT_TAG b642639117eafedc760d8b84c0d2c4872b0da084
 	DEPENDS ${ZLIB_PROJECT}
 	CONFIGURE_COMMAND ""
 	BUILD_COMMAND "make"

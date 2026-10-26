@@ -6,7 +6,7 @@ SET(FASTAHACK_PROJECT fastahack_project CACHE INTERNAL "fastahack project name")
 #SET(FASTAHACK_DIR ${CMAKE_BINARY_DIR}/externals/fastahack CACHE INTERNAL "fastahack project directory")
 ExternalProject_Add(${FASTAHACK_PROJECT}
 	GIT_REPOSITORY https://github.com/ekg/fastahack.git
-	GIT_TAG master
+	GIT_TAG 629c271f3d44f55d973aed3f4582be09730a2825
 	#UPDATE_DISCONNECTED true
 	CONFIGURE_COMMAND ""
 	BUILD_COMMAND ${MAKE_EXECUTABLE} -j -C <SOURCE_DIR>

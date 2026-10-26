@@ -6,7 +6,7 @@ SET(BWA_LIB)
 
 ExternalProject_Add( ${BWA_PROJECT}
 	GIT_REPOSITORY https://github.com/lh3/bwa.git
-	GIT_TAG master
+	GIT_TAG 1b3870f26f5f5fc32b4156755f00235ffed40631
 	CONFIGURE_COMMAND ""
 	BUILD_COMMAND "make"
 	INSTALL_COMMAND ""
