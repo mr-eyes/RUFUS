@@ -1,4 +1,6 @@
 #!/bin/sh
+set -eo pipefail
+trap 'status=$?; printf "%s\n" "$status" > "rufus-query.failed.$BASHPID"; exit "$status"' ERR
 
 CDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 RDIR=$CDIR/../
