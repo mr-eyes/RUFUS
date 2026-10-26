@@ -1624,7 +1624,7 @@ int PickDepthAverage(vector<int> Counts, int maxI)
         for (int i = 0; i < Counts.size(); i++)
         {
                 int depth = Counts[i];
-                if (depth > DistGlobal[maxI].size()){depth = DistGlobal[maxI].size();}
+                if (depth >= DistGlobal[maxI].size()){depth = DistGlobal[maxI].size() - 1;}
                 ////cout << "Count = " << Counts[i] << " depth = " << depth << " dist = " <<  DistGlobal[maxI][depth] ;
                 if (depth > DistLimitsGlobal[maxI][0] && depth < DistLimitsGlobal[maxI][1])
                 {
@@ -1681,7 +1681,7 @@ string BayseanGenotyper(vector<int> Counts, int& count, string VarNum)
 		for (int j = 0; j<Counts.size(); j++)
 		{
 			int depth = Counts[j]; 
-			if (depth > DistGlobal[copy].size()){depth = DistGlobal[copy].size();}
+			if (depth >= DistGlobal[copy].size()){depth = DistGlobal[copy].size() - 1;}
 			sum+=DistGlobal[copy][depth]; 
 		}
 	//	if (sum > 1){cout << "WTF sum is greater than 1, oh wait sum can be greater than if  we see the same kmer over and over " << sum << endl; }
@@ -1735,7 +1735,7 @@ string BayseanGenotyper(vector<int> Counts, int& count, string VarNum)
 	if (maxI <=2)
 		C = PickDepthSomatic(Counts);
 	else
-		int C = PickDepthAverage(Counts, maxI);
+		C = PickDepthAverage(Counts, maxI);
 	
 	//int C = PickDepth(Counts, maxI); 
 	/////////
@@ -5148,7 +5148,7 @@ void ProcessDist(string ModelFilePath)
 	}
 	for(int i =1; i < temp.size(); i++)
 	{
-		DistGlobal[i].push_back(atof(temp[i].c_str()));
+		DistGlobal[i-1].push_back(atof(temp[i].c_str()));
 	}
 	while( getline(ModelFile, line))
 	{
@@ -5195,7 +5195,7 @@ vector<int> GetHighAndLowForDist(int copy, double percent)
 	double cumulative = DistGlobal[copy][maxK];  
 	int lower = maxK;
 	int upper = maxK; 
-	while ( lower > 0 && upper < DistGlobal[copy].size() && cumulative/sum < percent)
+	while ( lower > 0 && upper + 1 < DistGlobal[copy].size() && cumulative/sum < percent)
 	{
 		lower+= -1;
 		upper++; 
@@ -5207,7 +5207,7 @@ vector<int> GetHighAndLowForDist(int copy, double percent)
 		lower+= -1;
 		cumulative+= DistGlobal[copy][lower];
 	}
-	while ( upper < DistGlobal[copy].size() && cumulative/sum < percent)
+	while ( upper + 1 < DistGlobal[copy].size() && cumulative/sum < percent)
 	{
 		upper++;
 		cumulative+= DistGlobal[copy][upper];
