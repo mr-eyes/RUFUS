@@ -35,7 +35,7 @@ while ($l1 = <>)
 		@temp = split(/\t/, $l1);	
 		$counter = $counter+1;
 		chomp ($l1);
-		if ($temp[0] == $chr && $temp[1] == $pos && $temp[3] == $ref && $temp[4] == $alt)
+		if ($temp[0] eq $chr && $temp[1] == $pos && $temp[3] eq $ref && $temp[4] eq $alt)
 		{
 				#print "$l1\n+++$lastLine\n"; 
 		}
