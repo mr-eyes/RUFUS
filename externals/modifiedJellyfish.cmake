@@ -9,6 +9,9 @@ SET(MODIFIED_JELLYFISH_LIB)
 ExternalProject_Add(${MODIFIED_JELLYFISH_PROJECT}
 	URL ${PROJECT_SOURCE_DIR}/src/modifiedJellyfish.tar.gz
 
+        # Same timestamp fix as jellyfish.cmake.
+        PATCH_COMMAND bash -c "cd <SOURCE_DIR> && find . -exec touch -t 200001010000 {} + && find . -name aclocal.m4 -exec touch -t 200001010001 {} + && find . -name configure -type f -exec touch -t 200001010002 {} + && find . -name config.h.in -exec touch -t 200001010003 {} + && find . -name Makefile.in -exec touch -t 200001010004 {} +"
+
         CONFIGURE_COMMAND ${PROJECT_SOURCE_DIR}/bin/externals/modified_jellyfish/src/modified_jellyfish_project/configure --prefix=${PROJECT_SOURCE_DIR}/bin/externals/modified_jellyfish/src/modified_jellyfish_project/
         BUILD_IN_SOURCE 1
         BUILD_COMMAND make

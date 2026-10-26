@@ -9,6 +9,9 @@ SET(JELLYFISH_LIB)
 ExternalProject_Add(${JELLYFISH_PROJECT}
         URL  https://github.com/gmarcais/Jellyfish/releases/download/v2.2.5/jellyfish-2.2.5.tar.gz
 
+        # Make the shipped autotools outputs newer than their inputs, so make does not rerun automake 1.14.
+        PATCH_COMMAND bash -c "cd <SOURCE_DIR> && find . -exec touch -t 200001010000 {} + && find . -name aclocal.m4 -exec touch -t 200001010001 {} + && find . -name configure -type f -exec touch -t 200001010002 {} + && find . -name config.h.in -exec touch -t 200001010003 {} + && find . -name Makefile.in -exec touch -t 200001010004 {} +"
+
         CONFIGURE_COMMAND ${PROJECT_SOURCE_DIR}/bin/externals/jellyfish/src/jellyfish_project/configure --prefix=${PROJECT_SOURCE_DIR}/bin/externals/jellyfish/src/jellyfish_project/
         BUILD_IN_SOURCE 1
         BUILD_COMMAND make
